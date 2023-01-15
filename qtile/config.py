@@ -33,6 +33,38 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, 
 from libqtile.lazy import lazy
 from libqtile.command import lazy
 
+# Colors
+
+colors = {
+    "rosewater"   : "#f4dbd6",
+    "flamingo"    : "#f0c6c6",
+    "pink"        : "#f5bde6",
+    "mauve"       : "#c6a0f6",
+    "red"         : "#ed8796",
+    "maroon"      : "#ee99a0",
+    "peach"       : "#f5a97f",
+    "yellow"      : "#eed49f",
+    "green"       : "#a6da95",
+    "teal"        : "#8bd5ca",
+    "sky"         : "#91d7e3",
+    "sapphire"    : "#7dc4e4",
+    "blue"        : "#8aadf4",
+    "lavender"    : "#b7bdf8",
+    "text"        : "#cad3f5",
+    "subtext1"    : "#b8c0e0",
+    "subtext0"    : "#a5adcb",
+    "overlay2"    : "#939ab7",
+    "overlay1"    : "#8087a2",
+    "overlay0"    : "#6e738d",
+    "surface2"    : "#5b6078",
+    "surface1"    : "#494d64",
+    "surface0"    : "#363a4f",
+    "base"        : "#24273a",
+    "mantle"      : "#1e2030",
+    "crust"       : "#181926"
+}
+
+
 mod = "mod4"
 terminal = "alacritty"
 
@@ -90,10 +122,12 @@ keys = [
     #Key([mod], "m",lazy.layout.maximize(),desc='toggle window between minimum and maximum sizes'),
     Key([mod, "shift" ], "q", lazy.spawn("rofi -show power-menu -modi power-menu:rofi-power-menu"), desc='power menu'),
     Key([mod], "e", lazy.spawn("thunar"), desc='file browser'),
-    Key([mod], "s", lazy.spawn("spotify"), desc='music player'),
+    Key([mod], "s", lazy.spawn("flatpak run com.spotify.Client "), desc='music player'),
     Key([mod, "shift"], "b", lazy.spawn("firefox --private-window"), desc='firefox incognito'),
     Key([mod], "b", lazy.spawn("firefox"), desc='firefox browser'),
     Key([mod, "shift"], "x",lazy.spawn("alacritty -e betterlockscreen -l"), desc='lockscreen'),
+    Key([mod, "shift"], "e", lazy.spawn("flatpak run com.microsoft.Edge"), desc='Microsoft edge'),
+    Key([mod, "shift"], "s", lazy.spawn("flameshot gui"), desc='screenshot'),
 ]
 
 
@@ -197,151 +231,304 @@ extension_defaults = widget_defaults.copy()
 # █▄▄ ▄▀█ █▀█
 # █▄█ █▀█ █▀▄
  
-screens = [
+# screens = [
 
+#     Screen(
+#         top=bar.Bar(
+#             [
+# 				widget.Spacer(length=20,
+#                     background='#1F1D2E',
+#                 ),
+				
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/launch_Icon.png',
+#                     margin=2,
+#                     background='#1F1D2E',
+#                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("rofi -show drun")}
+#                 ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/6.png',
+#                 ),
+
+#                 widget.GroupBox(
+#                     fontsize=16,
+#                     borderwidth=3,
+#                     highlight_method='block',
+#                     active='#7F61A7',
+#                     block_highlight_text_color="#CFB3E5",
+#                     highlight_color='#4B427E',
+#                     inactive='#BD85CB',
+#                     foreground='#4B427E',
+#                     background='#4B427E',
+#                     this_current_screen_border='#52548D',
+#                     this_screen_border='#52548D',
+#                     other_current_screen_border='#52548D',
+#                     other_screen_border='#52548D',
+#                     urgent_border='#52548D',
+#                     rounded=True,
+#                     disable_drag=True,
+#                  ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/5.png',
+#                 ),
+
+#                 widget.CurrentLayoutIcon(
+#                     background='#52548D',
+#                     padding = 0,
+#                     scale = 0.5,
+#                 ),
+
+#                     widget.CurrentLayout(
+#                     background='#52548D',
+#                     font= 'JetBrains Mono Bold',
+#                 ),
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/4.png',                
+#                 ),
+
+#                 widget.WindowName(
+#                     background = '#7676B2',
+#                     format = "{name}",
+#                     font='JetBrains Mono Bold',
+#                     empty_group_string = 'Desktop',
+#                 ),
+
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/3.png',                
+#                 ),   
+
+#                 widget.Systray(
+#                     background='#52548D',
+#                     fontsize=2,
+#                 ),
+
+#                 widget.TextBox(
+#                     text=' ',
+#                     background='#52548D',
+#                 ),
+
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/2.png',                
+#                     background='#52548D',
+#                 ),                       
+                                                
+#                 widget.TextBox(
+#                     text='',
+#                     size=20,
+#                     font='JetBrains Mono Bold',
+#                     background='#4B427E',
+#                 ),
+
+                
+#                 widget.Battery(format=' {percent:2.0%}',
+#                     font="JetBrains Mono ExtraBold",
+#                     fontsize=12,
+#                     charge_char='↑',
+#                     discharge_char='',
+#                     low_percentage=0.25,
+#                     low_background='#82aaff',
+#                     low_foreground='#282d3e',
+#                     update_interval=1,
+#                     padding=10,
+#                     background='#4b427E',
+#                 ),                     
+                
+#                 widget.Memory(format='﬙{MemUsed: .0f}{mm}',
+#                     font="JetBrains Mono Bold",
+#                     fontsize=12,
+#                     padding=10,
+#                     background='#4B427E',
+#                 ),
+
+#                 widget.TextBox(
+#                     text="",
+#                     font="Font Awesome 6 Free Solid",
+#                     fontsize=25,
+#                     padding=10,
+#                     background='#4B427E',
+#                     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")}
+#                    ),
+                
+
+#                 widget.Image(
+#                     filename='~/.config/qtile/Assets/1.png',                
+#                     background='#4B427E',
+#                 ),
+        
+#                 widget.Clock(
+#                     format='  %I:%M %p',
+#                     background='#1F1D2E',
+#                     font="JetBrains Mono Bold",
+#                 ),
+
+#                 widget.Spacer(
+#                     length=18,
+#                     background='#1F1D2E',
+#                 ),
+
+                
+#             ],
+#             30,
+#             margin = [6,6,6,6]
+#         ),
+#     ),
+# ]
+
+# █▄▄ ▄▀█ █▀█
+# █▄█ █▀█ █▀▄
+## from cufta22
+
+screens = [
     Screen(
         top=bar.Bar(
             [
-				widget.Spacer(length=20,
-                    background='#1F1D2E',
-                ),
-				
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/launch_Icon.png',
-                    margin=2,
-                    background='#1F1D2E',
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("rofi -show drun")}
+				widget.Spacer(
+                    length = 10,
                 ),
 
                 widget.Image(
-                    filename='~/.config/qtile/Assets/6.png',
-                ),
-
-                widget.GroupBox(
-                    fontsize=16,
-                    borderwidth=3,
-                    highlight_method='block',
-                    active='#7F61A7',
-                    block_highlight_text_color="#CFB3E5",
-                    highlight_color='#4B427E',
-                    inactive='#BD85CB',
-                    foreground='#4B427E',
-                    background='#4B427E',
-                    this_current_screen_border='#52548D',
-                    this_screen_border='#52548D',
-                    other_current_screen_border='#52548D',
-                    other_screen_border='#52548D',
-                    urgent_border='#52548D',
-                    rounded=True,
-                    disable_drag=True,
-                 ),
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/5.png',
-                ),
-
-                widget.CurrentLayoutIcon(
-                    background='#52548D',
-                    padding = 0,
-                    scale = 0.5,
-                ),
-
-                    widget.CurrentLayout(
-                    background='#52548D',
-                    font= 'JetBrains Mono Bold',
-                ),
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/4.png',                
-                ),
-
-                widget.WindowName(
-                    background = '#7676B2',
-                    format = "{name}",
-                    font='JetBrains Mono Bold',
-                    empty_group_string = 'Desktop',
-                ),
-
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/3.png',                
-                ),   
-
-                widget.Systray(
-                    background='#52548D',
-                    fontsize=2,
-                ),
-
-                widget.TextBox(
-                    text=' ',
-                    background='#52548D',
-                ),
-
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/2.png',                
-                    background='#52548D',
-                ),                       
-                                                
-                widget.TextBox(
-                    text='',
-                    size=20,
-                    font='JetBrains Mono Bold',
-                    background='#4B427E',
-                ),
-
-                
-                widget.Battery(format=' {percent:2.0%}',
-                    font="JetBrains Mono ExtraBold",
-                    fontsize=12,
-                    charge_char='↑',
-                    discharge_char='',
-                    low_percentage=0.25,
-                    low_background='#82aaff',
-                    low_foreground='#282d3e',
-                    update_interval=1,
-                    padding=10,
-                    background='#4b427E',
-                ),                     
-                
-                widget.Memory(format='﬙{MemUsed: .0f}{mm}',
-                    font="JetBrains Mono Bold",
-                    fontsize=12,
-                    padding=10,
-                    background='#4B427E',
-                ),
-
-                widget.TextBox(
-                    text="",
-                    font="Font Awesome 6 Free Solid",
-                    fontsize=25,
-                    padding=10,
-                    background='#4B427E',
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")}
-                   ),
-                
-
-                widget.Image(
-                    filename='~/.config/qtile/Assets/1.png',                
-                    background='#4B427E',
-                ),
-        
-                widget.Clock(
-                    format='  %I:%M %p',
-                    background='#1F1D2E',
-                    font="JetBrains Mono Bold",
+                    filename  = '~/.config/qtile/assets/bar/qtile.png',
+                    margin    = 7,
+                     mouse_callbacks  = {
+                        'Button1': lambda: qtile.cmd_spawn('rofi -show drun')
+                    }
                 ),
 
                 widget.Spacer(
-                    length=18,
-                    background='#1F1D2E',
+                    length = 10,
                 ),
 
-                
+                widget.GroupBox(
+                    fontsize                    = 20,
+                    margin_y                    = 3,
+                    margin_x                    = 5,
+                    borderwidth                 = 0,
+                    font                        = "Roboto, Regular",
+                    active                      = colors["green"],
+                    block_highlight_text_color  = colors["red"],
+                    inactive                    = colors["sapphire"],
+                    rounded                     = True,
+                    disable_drag                = True,
+                 ),
+
+                # ----------------------------------------
+
+                widget.Spacer(
+                    length = bar.STRETCH,
+                ),
+
+                # ----------------------------------------                 
+  
+                widget.Image(
+                    filename  = '~/.config/qtile/assets/bar/sun.png',
+                    margin    = 8,
+                ),
+                widget.Backlight(
+                    font                 = "Roboto, Regular",
+                    foreground           = colors["yellow"],
+                    brightness_file      = "/sys/class/backlight/intel_backlight/actual_brightness",
+                    max_brightness_file  = "/sys/class/backlight/intel_backlight/max_brightness",
+                    fontsize             = 15,
+                    padding              = 0,
+                ),
+
+                widget.Spacer(
+                    length = 16,
+                ), 
+
+                widget.Image(
+                    filename  = '~/.config/qtile/assets/bar/vol.png',
+                    margin    = 8,
+                ),
+                widget.Volume(
+                    font        = "Roboto, Regular",
+                    foreground  = colors["blue"],
+                    fontsize    = 15,
+                    padding     = 0,
+                ),
+
+                widget.Spacer(
+                    length = 16,
+                ),      
+
+                #widget.Memory{format='﬙{MemUsed: .0f}{mm}',
+                #    font        = "Roboto, Regular",
+                #    foreground  = colors["lavender"],
+                #    fontsize    = 15,
+                #    padding     = 0, 
+                #        },
+
+                widget.Image(
+                    filename  = '~/.config/qtile/assets/bar/bat.png',
+                    margin    = 7
+                ),         
+                widget.Battery(format=' {percent:2.0%}',
+                    font        = "Roboto, Regular",
+                    foreground  = colors["red"],
+                    fontsize    = 15,
+                    padding     = 0,
+                ),         
+
+                widget.Spacer(
+                    length = 30,
+                ),
+                widget.Spacer(
+                    length      =10,
+                    background  = colors["surface0"]
+                ), 
+                widget.Systray(
+                    icon_size   = 24,
+                    padding     = 0,
+                    background  = colors["surface0"]
+                ),   
+                widget.Spacer(
+                    length      = 10,
+                    background  = colors["surface0"]
+                ), 
+                widget.Spacer(
+                    length = 20,
+                ),
+        
+                widget.Clock(
+                    format  ='%I:%M %p',
+                    font    ="Roboto, Regular",
+                    fontsize = 15,
+                ),
+                 widget.Spacer(
+                    length = 10,
+                ),
+
+                widget.CurrentLayoutIcon(
+                    padding  = 0,
+                    scale    = 0.6,
+                    custom_icon_paths = [
+                        os.path.expanduser("~/.config/qtile/assets/layout/"),
+                    ],
+                ),
+
+                widget.Image(
+                    filename         = '~/.config/qtile/assets/bar/power.png',
+                    margin           = 8,
+                    mouse_callbacks  = {
+                        'Button1': lambda: qtile.cmd_spawn('rofi -show power-menu -modi power-menu:rofi-power-menu')
+                    }
+                ),
+
+                # qtile.cmd_spawn("rofi -show drun")
+
+                widget.Spacer(
+                    length = 10,
+                ),
             ],
-            30,
-            margin = [6,6,6,6]
+            32,
+            margin      = [12, 12, 12, 12],
+            background  = colors["base"]
         ),
     ),
 ]
